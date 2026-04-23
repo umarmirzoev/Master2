@@ -1,149 +1,183 @@
 import { motion } from "framer-motion";
-import { useLanguage } from "@/contexts/LanguageContext";
 import Header from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Shield, DollarSign, Clock, Headphones, CheckCircle, Star, Users, Wrench, Heart, Zap, Target, Award, ArrowRight, Truck, Search, FileText, UserCheck, Eye, ClipboardCheck } from "lucide-react";
+import {
+  Shield,
+  DollarSign,
+  Clock,
+  Headphones,
+  CheckCircle,
+  Star,
+  Users,
+  Wrench,
+  Heart,
+  Zap,
+  Truck,
+  Award,
+  ArrowRight,
+} from "lucide-react";
 
-// Страница "О нас" рассказывает о сервисе, его преимуществах, ценностях, процессе работы и призыве к действию.
 const About = () => {
-  const { t } = useLanguage();
-
-  // Ключевые преимущества сервиса выводятся отдельными карточками на странице.
-  const features = [
-    { icon: Shield, titleKey: "aboutVerifiedMasters", descKey: "aboutVerifiedMastersDesc" },
-    { icon: DollarSign, titleKey: "aboutTransparentPrices", descKey: "aboutTransparentPricesDesc" },
-    { icon: Clock, titleKey: "aboutFastArrival", descKey: "aboutFastArrivalDesc" },
-    { icon: Headphones, titleKey: "aboutSupport247", descKey: "aboutSupport247Desc" },
-    { icon: Truck, titleKey: "aboutConvenientOrder", descKey: "aboutConvenientOrderDesc" },
+  const heroStats = [
+    { value: "1000+", label: "мастеров" },
+    { value: "5000+", label: "выполненных заказов" },
+    { value: "120+", label: "услуг" },
+    { value: "4.8", label: "средний рейтинг" },
+    { value: "95%", label: "довольных клиентов" },
   ];
 
-  // Цифры помогают быстро показать масштаб платформы и уровень доверия.
-  const stats = [
-    { value: "1000+", labelKey: "aboutMasters", icon: Users },
-    { value: "120+", labelKey: "aboutServices", icon: Wrench },
-    { value: "5000+", labelKey: "aboutOrders", icon: CheckCircle },
-    { value: "4.8", labelKey: "aboutAvgRating", icon: Star },
+  const clientBenefits = [
+    { icon: Zap, title: "Быстро", desc: "Оформление заявки за 2 минуты и оперативный выезд мастера." },
+    { icon: Shield, title: "Надёжно", desc: "Проверенные специалисты и страхование работ." },
+    { icon: Heart, title: "Чисто", desc: "Аккуратный подход, уборка после работы и порядок в доме." },
+    { icon: CheckCircle, title: "С гарантией", desc: "Гарантия на все услуги до 3 месяцев." },
   ];
 
-  // Ценности объясняют, на каких принципах строится работа сервиса.
+  const masterAdvantages = [
+    { icon: Users, title: "Постоянные заказы", desc: "Поток заявок каждый день из всех районов города." },
+    { icon: Clock, title: "Свободный график", desc: "Вы сами выбираете, когда работать и какие заказы брать." },
+    { icon: DollarSign, title: "Честная оплата", desc: "Вы получаете большую часть заработка без скрытых комиссий." },
+    { icon: Headphones, title: "Поддержка 24/7", desc: "Менеджер всегда на связи и помогает решить спорные вопросы." },
+    { icon: Shield, title: "Безопасность", desc: "Мы проверяем клиентов и страхуем ваши выполненные работы." },
+    { icon: Wrench, title: "Рост навыков", desc: "Разнообразные задачи помогают стать профессионалом." },
+  ];
+
   const values = [
-    { icon: Shield, titleKey: "aboutReliability", descKey: "aboutReliabilityDesc" },
-    { icon: Zap, titleKey: "aboutSpeed", descKey: "aboutSpeedDesc" },
-    { icon: Target, titleKey: "aboutQuality", descKey: "aboutQualityDesc" },
-    { icon: Heart, titleKey: "aboutHonesty", descKey: "aboutHonestyDesc" },
-  ];
-
-  // Полный процесс заказа от поиска до завершения — по шагам.
-  const steps = [
-    { icon: Search, titleKey: "hiwStep1", descKey: "hiwStep1Desc" },
-    { icon: FileText, titleKey: "hiwStep2", descKey: "hiwStep2Desc" },
-    { icon: UserCheck, titleKey: "hiwStep3", descKey: "hiwStep3Desc" },
-    { icon: Eye, titleKey: "hiwStep4", descKey: "hiwStep4Desc" },
-    { icon: ClipboardCheck, titleKey: "hiwStep5", descKey: "hiwStep5Desc" },
-    { icon: CheckCircle, titleKey: "hiwStep6", descKey: "hiwStep6Desc" },
-    { icon: Truck, titleKey: "hiwStep7", descKey: "hiwStep7Desc" },
-    { icon: Wrench, titleKey: "hiwStep8", descKey: "hiwStep8Desc" },
-    { icon: Star, titleKey: "hiwStep9", descKey: "hiwStep9Desc" },
-  ];
-
-  // Преимущества процесса для клиента.
-  const benefits = [
-    { icon: Clock, titleKey: "hiwFast", descKey: "hiwFastDesc" },
-    { icon: Shield, titleKey: "hiwSafe", descKey: "hiwSafeDesc" },
-    { icon: DollarSign, titleKey: "hiwTransparent", descKey: "hiwTransparentDesc" },
-    { icon: Headphones, titleKey: "hiwConvenient", descKey: "hiwConvenientDesc" },
+    { icon: Heart, title: "Честность", desc: "Открытые цены и прозрачные условия." },
+    { icon: Shield, title: "Надёжность", desc: "Проверенные мастера и гарантия качества." },
+    { icon: Zap, title: "Скорость", desc: "Оперативное решение задач в течение часа." },
+    { icon: Star, title: "Качество", desc: "Высокие стандарты выполнения и контроль результата." },
   ];
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      {/* Первый экран коротко объясняет миссию страницы и задаёт тон всему разделу. */}
-      <section className="py-16 md:py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent pointer-events-none" />
-        <div className="container px-4 mx-auto relative">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">{t("aboutPageTitle")}</h1>
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">{t("aboutPageDesc")}</p>
-          </motion.div>
+
+      <section className="relative overflow-hidden bg-white py-16 md:py-24">
+        <div className="absolute left-1/2 top-0 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-emerald-100 opacity-80 blur-3xl" />
+        <div className="container mx-auto px-4 relative">
+          <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-6 xl:col-span-5">
+              <p className="text-sm uppercase tracking-[0.35em] text-emerald-600 font-bold mb-4">Мастер ТЧ</p>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-tight mb-6">
+                Мастер ТЧ — сервис, которому доверяют в Душанбе
+              </h1>
+              <p className="text-lg leading-8 text-slate-600 mb-8">
+                Мы находим проверенных мастеров и помогаем клиентам быстро решить бытовые задачи — от электрики до ремонта под ключ.
+              </p>
+
+              <div className="grid gap-3 sm:grid-cols-2 sm:gap-4 mb-10">
+                {[
+                  "Выезд мастера за 1 час",
+                  "Гарантия до 3 месяцев",
+                  "Проверенные специалисты",
+                  "Заказ без звонков",
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center gap-3 rounded-3xl bg-slate-50 px-4 py-3 shadow-sm">
+                    <CheckCircle className="w-5 h-5 text-emerald-500" />
+                    <span className="text-sm text-slate-600">{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-4">
+                <Button
+                  onClick={() => document.getElementById("about-contacts")?.scrollIntoView({ behavior: "smooth" })}
+                  className="rounded-full bg-emerald-600 text-white px-10 py-4 font-bold shadow-xl shadow-emerald-200 hover:bg-emerald-700"
+                >
+                  Оставить заявку
+                </Button>
+                <Link
+                  to="/become-master"
+                  className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-10 py-4 text-slate-900 font-semibold hover:bg-slate-100"
+                >
+                  Стать мастером
+                </Link>
+              </div>
+            </div>
+
+            <div className="lg:col-span-6 xl:col-span-7">
+              <div className="relative mx-auto max-w-[680px]">
+                <div className="rounded-[3rem] border border-slate-200 bg-white p-8 shadow-[0_40px_120px_rgba(15,23,42,0.08)]">
+                  <div className="mb-4 inline-flex items-center gap-3 rounded-full bg-emerald-50 px-4 py-2 text-emerald-700 text-xs uppercase tracking-[0.35em] font-semibold">
+                    <Zap className="w-4 h-4" />
+                    Мастер ТЧ
+                  </div>
+                  <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-4">Ремонт и бытовые услуги</h2>
+                  <p className="text-base leading-7 text-slate-600 mb-8">
+                    Стабильные заказы, высокие рейтинги и поддержка для каждого мастера.
+                  </p>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    {[
+                      "Работа с гарантией",
+                      "Поддержка 24/7",
+                      "Все районы города",
+                      "Прозрачные условия",
+                    ].map((item, index) => (
+                      <div key={index} className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
+                        <p className="text-sm font-semibold text-slate-900">{item}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Здесь раскрывается миссия проекта и его основная идея. */}
-      <section className="py-12 md:py-16 bg-muted/30">
-        <div className="container px-4 mx-auto max-w-4xl">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center">
-            <Award className="w-12 h-12 text-primary mx-auto mb-4" />
-            <h2 className="text-3xl font-bold text-foreground mb-4">{t("aboutMission")}</h2>
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">{t("aboutMissionDesc")}</p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Этот блок отвечает на вопрос, почему пользователю стоит выбрать именно сервис. */}
-      <section className="py-16 md:py-20">
-        <div className="container px-4 mx-auto">
-          <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12">
-            {t("aboutWhyChoose")}
-          </motion.h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {features.map((f, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-                <Card className="h-full hover:shadow-lg transition-shadow">
-                  <CardContent className="p-6">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-emerald-400 flex items-center justify-center shadow-lg mb-4">
-                      <f.icon className="w-7 h-7 text-primary-foreground" />
-                    </div>
-                    <h3 className="text-lg font-bold text-foreground mb-2">{t(f.titleKey)}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{t(f.descKey)}</p>
-                  </CardContent>
-                </Card>
+      <section className="bg-white py-10">
+        <div className="container mx-auto px-4">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              { title: "Выезд мастера за 1 час", desc: "Мы быстро отправим нужного специалиста на адрес." },
+              { title: "Гарантия до 3 месяцев", desc: "Гарантируем качество и ремонтные работы." },
+              { title: "Проверенные специалисты", desc: "Только честные и проверенные исполнители." },
+              { title: "Заказ без звонков", desc: "Оставьте заявку онлайн — мы сами перезвоним." },
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                className="rounded-[2rem] border border-slate-200 bg-slate-50 p-8 shadow-sm"
+              >
+                <p className="text-lg font-bold text-slate-900 mb-2">{item.title}</p>
+                <p className="text-sm text-slate-600 leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Блок со статистикой усиливает доверие через конкретные показатели. */}
-      <section className="py-16 bg-gradient-to-br from-primary to-emerald-500">
-        <div className="container px-4 mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-            {stats.map((s, i) => (
-              <motion.div key={i} initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="text-center">
-                <s.icon className="w-8 h-8 text-primary-foreground/80 mx-auto mb-2" />
-                <p className="text-4xl md:text-5xl font-bold text-primary-foreground">{s.value}</p>
-                <p className="text-primary-foreground/80 text-sm mt-1">{t(s.labelKey)}</p>
-              </motion.div>
-            ))}
+      <section className="py-16 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center mb-12">
+            <p className="text-xs uppercase tracking-[0.35em] text-emerald-600 font-bold mb-3">Что мы даём клиентам</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Удобно, быстро и с честной гарантией</h2>
           </div>
-        </div>
-      </section>
-
-      {/* Полный процесс заказа от поиска до завершения — 9 шагов. */}
-      <section className="py-16 md:py-20">
-        <div className="container px-4 mx-auto">
-          <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12">
-            {t("hiwTitle")}
-          </motion.h2>
-          <div className="max-w-3xl mx-auto space-y-4">
-            {steps.map((step, i) => {
-              const Icon = step.icon;
+          <div className="grid gap-6 md:grid-cols-2">
+            {clientBenefits.map((item, index) => {
+              const Icon = item.icon;
               return (
-                <motion.div key={i} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
-                  <Card className="hover:shadow-lg transition-shadow">
-                    <CardContent className="p-5 sm:p-6 flex items-start gap-4">
-                      <div className="relative z-10 w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br from-primary to-emerald-400 flex items-center justify-center shadow-lg flex-shrink-0">
-                        <Icon className="w-6 h-6 md:w-7 md:h-7 text-primary-foreground" />
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.08 }}
+                >
+                  <Card className="rounded-[2rem] border border-slate-200 bg-white shadow-sm p-8 hover:shadow-xl transition-shadow">
+                    <CardContent className="p-0">
+                      <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-3xl bg-emerald-50 text-emerald-600">
+                        <Icon className="w-7 h-7" />
                       </div>
-                      <div>
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-xs font-bold text-primary">{t("hiwStep")} {i + 1}</span>
-                        </div>
-                        <h3 className="text-lg font-bold text-foreground mb-1">{t(step.titleKey)}</h3>
-                        <p className="text-sm text-muted-foreground">{t(step.descKey)}</p>
-                      </div>
+                      <h3 className="text-xl font-bold text-slate-900 mb-3">{item.title}</h3>
+                      <p className="text-sm text-slate-500 leading-relaxed">{item.desc}</p>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -153,81 +187,124 @@ const About = () => {
         </div>
       </section>
 
-      {/* Преимущества процесса для клиента. */}
-      <section className="py-16 bg-muted/30">
-        <div className="container px-4 mx-auto">
-          <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-3xl md:text-4xl font-bold text-foreground text-center mb-10">
-            {t("hiwBenefitsTitle")}
-          </motion.h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            {benefits.map((b, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="text-center p-6 rounded-2xl bg-card border shadow-sm">
-                <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <b.icon className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="font-bold text-foreground mb-1">{t(b.titleKey)}</h3>
-                <p className="text-xs text-muted-foreground">{t(b.descKey)}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Безопасность и гарантии. */}
       <section className="py-16">
-        <div className="container px-4 mx-auto max-w-3xl text-center">
-          <Shield className="w-12 h-12 text-primary mx-auto mb-4" />
-          <h2 className="text-3xl font-bold text-foreground mb-4">{t("hiwSafetyTitle")}</h2>
-          <p className="text-lg text-muted-foreground mb-6 leading-relaxed">{t("hiwSafetyDesc")}</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {["hiwDocCheck", "hiwWorkGuarantee", "hiwSupport247", "hiwInsurance"].map((key, i) => (
-              <span key={i} className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium flex items-center gap-1.5">
-                <CheckCircle className="w-4 h-4" /> {t(key)}
-              </span>
-            ))}
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center mb-12">
+            <p className="text-xs uppercase tracking-[0.35em] text-emerald-600 font-bold mb-3">Преимущества для мастеров</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Плюсы для исполнителей</h2>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {masterAdvantages.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05 }}
+                >
+                  <Card className="h-full rounded-[2rem] border border-slate-200 bg-white shadow-sm p-8 hover:shadow-xl transition-shadow">
+                    <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-3xl bg-emerald-50 text-emerald-600">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-900 mb-3">{item.title}</h3>
+                    <p className="text-sm text-slate-500 leading-relaxed">{item.desc}</p>
+                  </Card>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Здесь перечислены ключевые ценности и подход платформы к работе. */}
-      <section className="py-16 md:py-20">
-        <div className="container px-4 mx-auto">
-          <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12">
-            {t("aboutValues")}
-          </motion.h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-            {values.map((v, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="text-center p-6 rounded-2xl bg-muted/50">
-                <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-primary/10 flex items-center justify-center">
-                  <v.icon className="w-7 h-7 text-primary" />
+      <section className="py-16 bg-muted/30">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="grid gap-8 lg:grid-cols-2 items-center">
+            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+              <Card className="rounded-[3rem] border border-slate-200 bg-white shadow-sm p-10">
+                <p className="text-xs uppercase tracking-[0.35em] text-emerald-600 font-bold mb-3">Наша миссия</p>
+                <h2 className="text-3xl font-black text-slate-900 mb-4">Мы делаем бытовые услуги проще</h2>
+                <p className="text-sm text-slate-500 leading-relaxed mb-6">
+                  Наша задача — организовать удобный сервис, где клиент получает мастера без лишних вопросов, а исполнитель — честные условия и стабильный поток заказов.
+                </p>
+                <div className="space-y-4">
+                  {[
+                    "Оперативный выезд по всему городу",
+                    "Контроль качества и гарантия на работы",
+                    "Прозрачные условия и честные цены",
+                  ].map((text, idx) => (
+                    <div key={idx} className="flex gap-3 rounded-3xl bg-emerald-50 p-4">
+                      <CheckCircle className="w-5 h-5 text-emerald-600 mt-1" />
+                      <p className="text-sm text-slate-600">{text}</p>
+                    </div>
+                  ))}
                 </div>
-                <h3 className="text-lg font-bold text-foreground mb-2">{t(v.titleKey)}</h3>
-                <p className="text-sm text-muted-foreground">{t(v.descKey)}</p>
-              </motion.div>
-            ))}
+              </Card>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+              <Card className="rounded-[3rem] overflow-hidden border border-slate-200 shadow-sm">
+                <img
+                  src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80"
+                  alt="Автомобиль мастера"
+                  className="h-full w-full object-cover"
+                />
+              </Card>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Финальный CTA переводит пользователя к выбору услуги или контакту с командой. */}
-      <section className="py-16 md:py-20">
-        <div className="container px-4 mx-auto text-center max-w-2xl">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">{t("aboutCTA")}</h2>
-            <p className="text-lg text-muted-foreground mb-8">{t("aboutCTADesc")}</p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link to="/categories">
-                <Button size="lg" className="rounded-full px-8 bg-gradient-to-r from-primary to-emerald-500 shadow-lg">
-                  {t("aboutChooseService")} <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </Link>
-              <Link to="/contacts">
-                <Button size="lg" variant="outline" className="rounded-full px-8">{t("aboutContactUs")}</Button>
+      <section className="py-16">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mx-auto text-center mb-10">
+            <p className="text-xs uppercase tracking-[0.35em] text-emerald-600 font-bold mb-3">Наши ценности</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Что мы ценим в работе</h2>
+          </div>
+          <div className="grid gap-6 md:grid-cols-4">
+            {values.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.08 }}>
+                  <Card className="rounded-[2rem] border border-slate-200 bg-white shadow-sm p-8 text-center">
+                    <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-3xl bg-emerald-50 text-emerald-600">
+                      <Icon className="w-7 h-7" />
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-900 mb-2">{item.title}</h3>
+                    <p className="text-sm text-slate-500 leading-relaxed">{item.desc}</p>
+                  </Card>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section id="about-contacts" className="py-16 bg-emerald-600 text-white">
+        <div className="container mx-auto px-4">
+          <div className="grid gap-6 lg:grid-cols-3 lg:items-center max-w-6xl mx-auto">
+            <div>
+              <p className="text-sm uppercase tracking-[0.35em] text-emerald-200 font-bold mb-3">Есть вопросы?</p>
+              <h2 className="text-3xl md:text-4xl font-black mb-4">Мы на связи и готовы помочь</h2>
+              <p className="text-slate-100 max-w-2xl leading-relaxed">Напишите в WhatsApp или выберите услугу — и мы организуем выезд мастера в удобное время.</p>
+            </div>
+            <div className="rounded-[2rem] bg-white/10 p-6">
+              <p className="text-xs uppercase tracking-[0.35em] text-emerald-200 mb-2">Контакты</p>
+              <p className="text-lg font-bold">+992 979 117 007</p>
+              <p className="text-sm text-emerald-100 mt-2">WhatsApp / звонки</p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Button asChild className="rounded-full bg-white text-emerald-700 px-8 py-4 font-black hover:bg-slate-100">
+                <a href="https://wa.me/992979117007" target="_blank" rel="noopener noreferrer">Написать в WhatsApp</a>
+              </Button>
+              <Link to="/categories" className="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/10 px-8 py-4 text-white font-semibold hover:bg-white/20">
+                Выбрать услугу
               </Link>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
+
       <Footer />
     </div>
   );

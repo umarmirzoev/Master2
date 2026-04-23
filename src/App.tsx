@@ -11,6 +11,7 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Contacts from "./pages/Contacts";
 import BecomeMaster from "./pages/BecomeMaster";
+import InstallApp from "./pages/InstallApp";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import MasterDashboardPage from "./pages/MasterDashboardPage";
@@ -61,6 +62,7 @@ const AnimatedRoutes = () => {
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<PageTransition><Index /></PageTransition>} />
           <Route path="/about" element={<PageTransition><About /></PageTransition>} />
+          <Route path="/install-app" element={<PageTransition><InstallApp /></PageTransition>} />
           <Route path="/categories" element={<PageTransition><PriceList /></PageTransition>} />
           <Route path="/category/:id" element={<PageTransition><CategoryDetail /></PageTransition>} />
           <Route path="/service/:id" element={<PageTransition><ServiceDetail /></PageTransition>} />

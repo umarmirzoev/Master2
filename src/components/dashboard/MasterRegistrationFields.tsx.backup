@@ -28,7 +28,6 @@ export default function MasterRegistrationFields({ onComplete, userId }: Props) 
   const [uploading, setUploading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [documents, setDocuments] = useState<{ name: string; url: string }[]>([]);
-  const [uploadErrors, setUploadErrors] = useState<string[]>([]);
 
   const toggleItem = (item: string, list: string[], setter: (v: string[]) => void) => {
     setter(list.includes(item) ? list.filter((i) => i !== item) : [...list, item]);
@@ -126,7 +125,7 @@ export default function MasterRegistrationFields({ onComplete, userId }: Props) 
             <label>
               {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
               Загрузить файлы
-              <input type="file" multiple accept=".png,.jpg,.jpeg,.pdf,image/png,image/jpeg,application/pdf" className="hidden" onChange={handleFileUpload} />
+              <input type="file" multiple accept="image/*,.pdf" className="hidden" onChange={handleFileUpload} />
             </label>
           </Button>
         </div>

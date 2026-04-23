@@ -19,7 +19,6 @@ import {
 import { Badge } from "@/components/ui/badge";
 import {
   Languages,
-  LogIn,
   LogOut,
   Menu,
   X,
@@ -31,7 +30,6 @@ import {
   LayoutDashboard,
   User,
   ShoppingBag,
-  ShoppingCart,
 } from "lucide-react";
 import NotificationBell from "@/components/NotificationBell";
 
@@ -137,26 +135,13 @@ export default function Header() {
               </>
             ) : !loading ? (
               <Button
-                onClick={() => navigate("/auth")}
+                onClick={() => navigate("/install-app")}
                 size="sm"
                 className="hidden sm:flex rounded-xl gap-2 px-4 h-9 bg-gradient-to-r from-primary to-primary-glow hover:opacity-90 shadow-sm"
               >
-                <LogIn className="w-4 h-4" />
-                {t("login")}
+                Установить приложение
               </Button>
             ) : null}
-
-            {/* Корзина всегда доступна и показывает текущее количество товаров. */}
-            <Link to="/cart">
-              <Button variant="ghost" size="icon" className="rounded-xl relative h-9 w-9">
-                <ShoppingCart className="w-[18px] h-[18px]" />
-                {itemCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-primary text-primary-foreground text-[10px] flex items-center justify-center font-bold">
-                    {itemCount}
-                  </span>
-                )}
-              </Button>
-            </Link>
 
             {/* Переключатель языка меняет локализацию интерфейса на всём сайте. */}
             <DropdownMenu>
@@ -253,11 +238,10 @@ export default function Header() {
                       ) : (
                         <SheetClose asChild>
                           <Link
-                            to="/auth"
+                            to="/install-app"
                             className="flex items-center justify-center gap-2 px-4 py-3 rounded-2xl bg-gradient-to-r from-primary to-primary-glow text-primary-foreground font-semibold hover:opacity-90 transition-all shadow-md"
                           >
-                            <LogIn className="w-5 h-5" />
-                            {t("login")}
+                            Установить приложение
                           </Link>
                         </SheetClose>
                       )}
