@@ -9,7 +9,6 @@ import { CartProvider } from "@/hooks/useCart";
 import { AnimatePresence, motion } from "framer-motion";
 import Index from "./pages/Index";
 import About from "./pages/About";
-import HowItWorks from "./pages/HowItWorks";
 import Contacts from "./pages/Contacts";
 import BecomeMaster from "./pages/BecomeMaster";
 import Auth from "./pages/Auth";
@@ -59,16 +58,15 @@ const AnimatedRoutes = () => {
   const location = useLocation();
   return (
     <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<PageTransition><Index /></PageTransition>} />
-        <Route path="/about" element={<PageTransition><About /></PageTransition>} />
-        <Route path="/how-it-works" element={<PageTransition><HowItWorks /></PageTransition>} />
-        <Route path="/categories" element={<PageTransition><PriceList /></PageTransition>} />
-        <Route path="/category/:id" element={<PageTransition><CategoryDetail /></PageTransition>} />
-        <Route path="/service/:id" element={<PageTransition><ServiceDetail /></PageTransition>} />
-        <Route path="/contacts" element={<PageTransition><Contacts /></PageTransition>} />
-        <Route path="/services" element={<PageTransition><NotFound /></PageTransition>} />
-        <Route path="/become-master" element={<PageTransition><BecomeMaster /></PageTransition>} />
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<PageTransition><Index /></PageTransition>} />
+          <Route path="/about" element={<PageTransition><About /></PageTransition>} />
+          <Route path="/categories" element={<PageTransition><PriceList /></PageTransition>} />
+          <Route path="/category/:id" element={<PageTransition><CategoryDetail /></PageTransition>} />
+          <Route path="/service/:id" element={<PageTransition><ServiceDetail /></PageTransition>} />
+          <Route path="/contacts" element={<PageTransition><Contacts /></PageTransition>} />
+          <Route path="/services" element={<PageTransition><NotFound /></PageTransition>} />
+          <Route path="/become-master" element={<PageTransition><BecomeMaster /></PageTransition>} />
         <Route path="/auth" element={<PageTransition><Auth /></PageTransition>} />
         <Route path="/master/:id" element={<PageTransition><MasterProfile /></PageTransition>} />
         <Route path="/masters" element={<PageTransition><Masters /></PageTransition>} />

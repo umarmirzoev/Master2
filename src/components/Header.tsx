@@ -25,7 +25,6 @@ import {
   X,
   ChevronRight,
   Building2,
-  HelpCircle,
   Phone,
   UserPlus,
   Wrench,
@@ -53,15 +52,16 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Основной список ссылок используется и на десктопе, и в мобильном меню.
-  const navItems = [
-    { path: "/categories", labelKey: "navCategories", icon: Wrench },
-    { path: "/masters", labelKey: "navMasters", icon: User },
-    { path: "/shop", labelKey: "navShop", icon: ShoppingBag },
-    { path: "/how-it-works", labelKey: "navHowItWorks", icon: HelpCircle },
-    { path: "/contacts", labelKey: "navContacts", icon: Phone },
-    { path: "/become-master", labelKey: "navBecomeMaster", icon: UserPlus },
-  ];
+   // Основной список ссылок используется и на десктопе, и в мобильном меню.
+   const navItems = [
+     { path: "/", labelKey: "navHome", icon: null },
+     { path: "/categories", labelKey: "navCategories", icon: Wrench },
+     { path: "/masters", labelKey: "navMasters", icon: User },
+     { path: "/shop", labelKey: "navShop", icon: ShoppingBag },
+     { path: "/about", labelKey: "navAbout", icon: null },
+     { path: "/contacts", labelKey: "navContacts", icon: Phone },
+     { path: "/become-master", labelKey: "navBecomeMaster", icon: UserPlus },
+   ];
 
   const getLanguageLabel = () => {
     switch (language) {
@@ -231,7 +231,7 @@ export default function Header() {
                             }`}
                           >
                             <div className="flex items-center gap-3">
-                              <Icon className="w-5 h-5" />
+                              {Icon && <Icon className="w-5 h-5" />}
                               <span className="font-medium">{t(item.labelKey)}</span>
                             </div>
                             <ChevronRight className="w-4 h-4 opacity-50" />

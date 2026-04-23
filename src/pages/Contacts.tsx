@@ -9,140 +9,297 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useToast } from "@/hooks/use-toast";
-import { Phone, Mail, Clock, MapPin, MessageCircle, Send, HelpCircle } from "lucide-react";
+import { 
+  Phone, Mail, Clock, MapPin, MessageCircle, Send, 
+  HelpCircle, Paperclip, CheckCircle2, Zap, Trophy, Shield, Headset,
+  Map as MapIcon, ChevronRight
+} from "lucide-react";
 
-// Страница контактов показывает способы связи, форму обратной связи, карту и FAQ.
 const Contacts = () => {
   const { t } = useLanguage();
   const { toast } = useToast();
   const [formData, setFormData] = useState({ name: "", phone: "", email: "", message: "" });
   const [sending, setSending] = useState(false);
 
-  // Отправка формы пока сделана как клиентская имитация с уведомлением об успехе.
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSending(true);
     setTimeout(() => {
       setSending(false);
-      toast({ title: t("contactsMessageSent"), description: t("contactsMessageSentDesc") });
+      toast({ title: "Сообщение отправлено", description: "Мы свяжемся с вами в ближайшее время." });
       setFormData({ name: "", phone: "", email: "", message: "" });
     }, 1000);
   };
 
-  const contacts = [
-    { icon: Phone, labelKey: "contactsPhone", value: "+992 900 00 00 00", href: "tel:+992900000000", color: "from-primary to-emerald-400" },
-    { icon: Mail, labelKey: "contactsEmail", value: "support@masterchas.tj", href: "mailto:support@masterchas.tj", color: "from-blue-500 to-cyan-400" },
-    { icon: MapPin, labelKey: "contactsAddress", value: t("contactsAddressValue"), href: null, color: "from-violet-500 to-purple-400" },
-    { icon: Clock, labelKey: "contactsWorkHours", value: t("contactsWorkHoursValue"), href: null, color: "from-amber-500 to-orange-400" },
-    { icon: MessageCircle, labelKey: "contactsWhatsApp", value: "+992 900 00 00 00", href: "https://wa.me/992900000000", color: "from-green-500 to-emerald-400" },
-    { icon: Send, labelKey: "contactsTelegram", value: "@masterchas_tj", href: "https://t.me/masterchas_tj", color: "from-sky-500 to-blue-400" },
+  const contactCards = [
+    { icon: <Phone className="w-5 h-5 text-emerald-500" />, label: "Телефон", value: "+992 979 117 007", sub: "Звоните в любое время", color: "bg-emerald-50", href: "tel:+992979117007" },
+    { icon: <Mail className="w-5 h-5 text-blue-500" />, label: "Почта", value: "support@masterchas.tj", sub: "Ответим в течение часа", color: "bg-blue-50", href: "mailto:support@masterchas.tj" },
+    { icon: <MapPin className="w-5 h-5 text-purple-500" />, label: "Адрес", value: "Душанбе, Тоҷикистон", sub: "Работаем по всему городу", color: "bg-purple-50", href: "https://www.google.com/maps/search/?api=1&query=Dushanbe" },
+    { icon: <Clock className="w-5 h-5 text-amber-500" />, label: "Режим работы", value: "24/7 — круглосуточно", sub: "Без выходных", color: "bg-amber-50", href: null },
+    { icon: <MessageCircle className="w-5 h-5 text-green-500" />, label: "WhatsApp", value: "+992 979 117 007", sub: "Быстрый ответ", color: "bg-green-50", href: "https://wa.me/992979117007" },
+    { icon: <Send className="w-5 h-5 text-sky-500" />, label: "Telegram", value: "@masterchas_tj", sub: "Напишите нам", color: "bg-sky-50", href: "https://t.me/masterchas_tj" },
   ];
 
-  // FAQ keys
-  const faqKeys = [
-    { qKey: "faq1q", aKey: "faq1a" },
-    { qKey: "faq2q", aKey: "faq2a" },
-    { qKey: "faq3q", aKey: "faq3a" },
-    { qKey: "faq4q", aKey: "faq4a" },
-    { qKey: "faq5q", aKey: "faq5a" },
-    { qKey: "faq6q", aKey: "faq6a" },
+  const faqs = [
+    { q: "Как заказать мастера?", a: "Вы можете оставить заявку на сайте через форму быстрого заказа, выбрать мастера в каталоге или просто позвонить нам по телефону." },
+    { q: "Какие гарантии на работу?", a: "Мы предоставляем официальную гарантию на все виды выполненных работ. Срок гарантии зависит от типа услуги и составляет от 3 до 12 месяцев." },
+    { q: "Сколько стоит вызов мастера?", a: "Вызов мастера для осмотра и консультации бесплатен при условии выполнения работ. В случае отказа от работ стоимость выезда составляет 30 сомони." },
+    { q: "Можно ли выбрать конкретного мастера?", a: "Да, в нашем каталоге вы можете ознакомиться с профилями мастеров, их рейтингом и отзывами, и выбрать того, кто вам больше нравится." },
+    { q: "Как быстро приедет мастер?", a: "В среднем мастер приезжает в течение 45-60 минут после подтверждения заказа, в зависимости от вашего местоположения и загруженности дорог." },
+    { q: "Как оплатить услуги?", a: "Оплатить услуги можно наличными мастеру или переводом на карту/кошелек после завершения и проверки всех работ." },
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#F8FAFC]">
       <Header />
-      <section className="py-16 md:py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent pointer-events-none" />
-        <div className="container px-4 mx-auto relative">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">{t("contactsTitle")}</h1>
-            <p className="text-lg text-muted-foreground">{t("contactsDescription")}</p>
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="pb-12">
-        <div className="container px-4 mx-auto max-w-5xl">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {contacts.map((item, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }}>
-                <Card className="h-full hover:shadow-lg transition-shadow">
-                  <CardContent className="p-5 flex items-center gap-4">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center shadow-md flex-shrink-0`}>
-                      <item.icon className="w-6 h-6 text-primary-foreground" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">{t(item.labelKey)}</p>
-                      {item.href ? (
-                        <a href={item.href} target="_blank" rel="noopener noreferrer" className="font-semibold text-foreground hover:text-primary transition-colors">{item.value}</a>
-                      ) : (
-                        <p className="font-semibold text-foreground">{item.value}</p>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
+      
+      {/* Hero Section */}
+      <section className="bg-[#F0FDF4] pt-12 pb-16 overflow-hidden border-b border-green-100">
+        <div className="container px-4 mx-auto max-w-7xl">
+          <div className="flex flex-col lg:flex-row items-center gap-12">
+            
+            {/* Left Content */}
+            <div className="flex-1 text-left">
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">Свяжитесь с нами</h1>
+                <p className="text-lg text-slate-600 mb-10 font-medium">
+                  Звоните, пишите в WhatsApp или Telegram — мы на связи 24/7.
+                </p>
+                <div className="hidden lg:block relative">
+                  <img src="/images/master_hero.png" alt="Master" className="w-80 h-auto object-contain" />
+                  {/* Decorative element for van if it existed, but we use master_hero */}
+                </div>
               </motion.div>
-            ))}
+            </div>
+
+            {/* Right Contact Grid */}
+            <div className="w-full lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {contactCards.map((card, i) => (
+                <motion.div 
+                  key={i} 
+                  initial={{ opacity: 0, scale: 0.9 }} 
+                  animate={{ opacity: 1, scale: 1 }} 
+                  transition={{ delay: i * 0.05 }}
+                >
+                  {card.href ? (
+                    <a href={card.href} target="_blank" rel="noopener noreferrer" className="block">
+                      <ContactCard card={card} />
+                    </a>
+                  ) : (
+                    <ContactCard card={card} />
+                  )}
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="py-12 bg-muted/30">
-        <div className="container px-4 mx-auto max-w-5xl">
-          <div className="grid lg:grid-cols-2 gap-8">
-            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <Card>
-                <CardContent className="p-6">
-                  <h2 className="text-2xl font-bold text-foreground mb-2">{t("contactsWriteUs")}</h2>
-                  <p className="text-sm text-muted-foreground mb-6">{t("contactsWriteUsDesc")}</p>
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <Input placeholder={t("contactsYourName")} value={formData.name} onChange={e => setFormData(p => ({ ...p, name: e.target.value }))} required className="h-12" />
-                    <Input placeholder={t("contactsPhonePlaceholder")} type="tel" value={formData.phone} onChange={e => setFormData(p => ({ ...p, phone: e.target.value }))} required className="h-12" />
-                    <Input placeholder={t("contactsEmailOptional")} type="email" value={formData.email} onChange={e => setFormData(p => ({ ...p, email: e.target.value }))} className="h-12" />
-                    <Textarea placeholder={t("contactsYourMessage")} value={formData.message} onChange={e => setFormData(p => ({ ...p, message: e.target.value }))} required className="min-h-[120px]" />
-                    <Button type="submit" className="w-full rounded-full h-12 bg-gradient-to-r from-primary to-emerald-500" disabled={sending}>
-                      {sending ? t("contactsSending") : t("contactsSendMessage")}
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <Card className="h-full overflow-hidden">
-                <CardContent className="p-0 h-full min-h-[400px]">
-                  <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=68.7038%2C38.5198%2C68.8438%2C38.5998&layer=mapnik&marker=38.5598%2C68.7738" width="100%" height="100%" style={{ border: 0, minHeight: 400 }} title="Душанбе" loading="lazy" />
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
+      {/* Form & Map Section */}
       <section className="py-16">
-        <div className="container px-4 mx-auto max-w-3xl">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-            <HelpCircle className="w-10 h-10 text-primary mx-auto mb-3" />
-            <h2 className="text-3xl font-bold text-foreground mb-2">{t("contactsFAQ")}</h2>
-            <p className="text-muted-foreground">{t("contactsFAQDesc")}</p>
-          </motion.div>
-          <Accordion type="single" collapsible className="space-y-2">
-            {faqKeys.map((item, i) => {
-              const q = t(item.qKey);
-              const a = t(item.aKey);
-              if (q === item.qKey) return null; // skip if no translation found
-              return (
-                <AccordionItem key={i} value={`faq-${i}`} className="bg-card border rounded-xl px-4">
-                  <AccordionTrigger className="text-left font-medium text-foreground hover:no-underline">{q}</AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">{a}</AccordionContent>
-                </AccordionItem>
-              );
-            })}
-          </Accordion>
+        <div className="container px-4 mx-auto max-w-7xl">
+          <div className="grid lg:grid-cols-12 gap-8 items-start">
+            
+            {/* Form */}
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }} 
+              whileInView={{ opacity: 1, x: 0 }} 
+              viewport={{ once: true }}
+              className="lg:col-span-5"
+            >
+              <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100">
+                <h2 className="text-2xl font-black text-slate-900 mb-2">Напишите нам</h2>
+                <p className="text-sm text-slate-500 mb-8">Заполните форму и мы ответим вам в ближайшее время</p>
+                
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="space-y-1.5">
+                    <label className="text-[11px] font-bold text-slate-400 uppercase ml-2">Ваше имя</label>
+                    <Input 
+                      placeholder="Иван Иванов" 
+                      value={formData.name} 
+                      onChange={e => setFormData(p => ({ ...p, name: e.target.value }))} 
+                      required 
+                      className="h-14 rounded-2xl bg-slate-50 border-none focus-visible:ring-emerald-500" 
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-[11px] font-bold text-slate-400 uppercase ml-2">Телефон</label>
+                    <Input 
+                      placeholder="+992 000 000 000" 
+                      type="tel" 
+                      value={formData.phone} 
+                      onChange={e => setFormData(p => ({ ...p, phone: e.target.value }))} 
+                      required 
+                      className="h-14 rounded-2xl bg-slate-50 border-none focus-visible:ring-emerald-500" 
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-[11px] font-bold text-slate-400 uppercase ml-2">Email (необязательно)</label>
+                    <Input 
+                      placeholder="example@mail.com" 
+                      type="email" 
+                      value={formData.email} 
+                      onChange={e => setFormData(p => ({ ...p, email: e.target.value }))} 
+                      className="h-14 rounded-2xl bg-slate-50 border-none focus-visible:ring-emerald-500" 
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-[11px] font-bold text-slate-400 uppercase ml-2">Ваше сообщение</label>
+                    <Textarea 
+                      placeholder="Опишите вашу задачу..." 
+                      value={formData.message} 
+                      onChange={e => setFormData(p => ({ ...p, message: e.target.value }))} 
+                      required 
+                      className="min-h-[120px] rounded-2xl bg-slate-50 border-none focus-visible:ring-emerald-500 resize-none p-4" 
+                    />
+                  </div>
+                  
+                  <div className="flex items-center gap-2 text-slate-400 hover:text-emerald-500 cursor-pointer transition-colors pt-2 group">
+                    <Paperclip className="w-4 h-4" />
+                    <span className="text-xs font-bold uppercase tracking-wider">Прикрепить файл (фото, документ)</span>
+                  </div>
+
+                  <Button 
+                    type="submit" 
+                    className="w-full rounded-2xl h-16 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-lg shadow-lg shadow-emerald-100 transition-all gap-2" 
+                    disabled={sending}
+                  >
+                    {sending ? "Отправка..." : "Отправить сообщение"}
+                    <Send className="w-5 h-5" />
+                  </Button>
+                  <p className="text-[10px] text-center text-slate-400 mt-4">
+                    Отправляя форму, вы соглашаетесь с <span className="underline cursor-pointer">политикой конфиденциальности</span>
+                  </p>
+                </form>
+              </div>
+            </motion.div>
+
+            {/* Map */}
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }} 
+              whileInView={{ opacity: 1, x: 0 }} 
+              viewport={{ once: true }}
+              className="lg:col-span-7 h-full min-h-[500px] lg:min-h-[600px] relative rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-sm"
+            >
+              <iframe 
+                src="https://www.openstreetmap.org/export/embed.html?bbox=68.7038%2C38.5198%2C68.8438%2C38.5998&layer=mapnik&marker=38.5598%2C68.7738" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                title="Душанбе" 
+                loading="lazy" 
+              />
+              
+              {/* Custom Map Marker Overlay */}
+              <div className="absolute top-10 left-10 z-10">
+                <div className="bg-white p-4 rounded-3xl shadow-xl border border-slate-100 flex items-center gap-4 animate-bounce-slow">
+                  <div className="w-10 h-10 rounded-2xl bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-100">
+                    <MapPin className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-slate-900">Наш офис</p>
+                    <p className="text-[10px] text-slate-400">Душанбе, Тоҷикистон</p>
+                    <p className="text-[10px] text-emerald-500 font-bold mt-1">Мы находимся в центре города</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="absolute bottom-6 right-6 z-10 flex flex-col gap-2">
+                <Button size="sm" className="rounded-xl bg-white text-slate-900 hover:bg-slate-50 shadow-lg border border-slate-100 h-10 px-4 font-bold text-xs gap-2">
+                  <MapIcon className="w-4 h-4 text-emerald-500" />
+                  Построить маршрут
+                </Button>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
+
+      {/* Features Row */}
+      <section className="py-10 border-y border-slate-100 bg-white">
+        <div className="container px-4 mx-auto max-w-7xl">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+            <FeatureItem icon={<Zap className="w-5 h-5 text-emerald-500" />} title="Быстрый ответ" sub="Ответим в течение 15 минут" />
+            <FeatureItem icon={<Trophy className="w-5 h-5 text-emerald-500" />} title="Профессиональная помощь" sub="Опытные специалисты" />
+            <FeatureItem icon={<CheckCircle2 className="w-5 h-5 text-emerald-500" />} title="Гарантия качества" sub="На все виды работ" />
+            <FeatureItem icon={<Shield className="w-5 h-5 text-emerald-500" />} title="Честные цены" sub="Фиксированная стоимость" />
+            <FeatureItem icon={<Headset className="w-5 h-5 text-emerald-500" />} title="Поддержка 24/7" sub="Всегда на связи" />
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20">
+        <div className="container px-4 mx-auto max-w-5xl">
+          <div className="text-center mb-16">
+            <div className="w-16 h-16 rounded-3xl bg-emerald-50 flex items-center justify-center mx-auto mb-4">
+              <HelpCircle className="w-8 h-8 text-emerald-500" />
+            </div>
+            <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-4">Часто задаваемые вопросы</h2>
+            <p className="text-slate-500">Ответы на популярные вопросы наших клиентов</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-x-12 gap-y-4">
+            <Accordion type="single" collapsible className="w-full space-y-4">
+              {faqs.slice(0, 3).map((faq, i) => (
+                <AccordionItem key={i} value={`faq-${i}`} className="border-none bg-white rounded-[2rem] px-6 shadow-sm">
+                  <AccordionTrigger className="text-left font-bold text-slate-900 hover:no-underline py-6">
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-slate-500 leading-relaxed pb-6">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+            <Accordion type="single" collapsible className="w-full space-y-4">
+              {faqs.slice(3).map((faq, i) => (
+                <AccordionItem key={i+3} value={`faq-${i+3}`} className="border-none bg-white rounded-[2rem] px-6 shadow-sm">
+                  <AccordionTrigger className="text-left font-bold text-slate-900 hover:no-underline py-6">
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-slate-500 leading-relaxed pb-6">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
 };
+
+function ContactCard({ card }: { card: any }) {
+  return (
+    <Card className="border-none shadow-sm rounded-3xl overflow-hidden hover:shadow-md transition-all cursor-pointer h-full">
+      <CardContent className="p-5 flex items-center gap-4">
+        <div className={`w-12 h-12 rounded-2xl ${card.color} flex items-center justify-center shrink-0`}>
+          {card.icon}
+        </div>
+        <div className="min-w-0">
+          <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-0.5">{card.label}</p>
+          <p className="text-sm font-bold text-slate-900 truncate">{card.value}</p>
+          <p className="text-[10px] text-slate-400">{card.sub}</p>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+function FeatureItem({ icon, title, sub }: { icon: React.ReactNode; title: string; sub: string }) {
+  return (
+    <div className="flex flex-col items-center text-center gap-2">
+      <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center mb-1">
+        {icon}
+      </div>
+      <h4 className="text-[11px] font-bold text-slate-900 uppercase tracking-wider">{title}</h4>
+      <p className="text-[10px] text-slate-400">{sub}</p>
+    </div>
+  );
+}
 
 export default Contacts;

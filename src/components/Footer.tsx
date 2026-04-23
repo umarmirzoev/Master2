@@ -12,7 +12,6 @@ export const Footer = () => {
   const navLinks = [
     { path: "/about", labelKey: "navAbout" },
     { path: "/categories", labelKey: "navCategories" },
-    { path: "/how-it-works", labelKey: "navHowItWorks" },
     { path: "/contacts", labelKey: "navContacts" },
     { path: "/masters", labelKey: "navMasters" },
     { path: "/shop", labelKey: "navShop" },

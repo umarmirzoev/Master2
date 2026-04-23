@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 import Header from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -31,6 +32,7 @@ export default function MasterProfile() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   const [master, setMaster] = useState<any>(null);
   const [reviews, setReviews] = useState<any[]>([]);
@@ -122,6 +124,13 @@ export default function MasterProfile() {
         <Button variant="ghost" className="mb-4 rounded-full text-muted-foreground hover:text-foreground" onClick={() => navigate(-1)}>
           <ArrowLeft className="w-4 h-4 mr-2" /> Назад
         </Button>
+
+        {/* Введение о мастерах */}
+        <div className="mb-6 p-6 bg-gradient-to-r from-primary/5 to-emerald-500/5 rounded-2xl border border-primary/10">
+          <p className="text-base text-muted-foreground leading-relaxed">
+            {t("masterProfileIntro")}
+          </p>
+        </div>
 
         <div className="lg:grid lg:grid-cols-[1fr_340px] lg:gap-6">
           {/* Основная колонка раскрывает профиль мастера, его услуги, отзывы и географию работы. */}

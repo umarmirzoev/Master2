@@ -10,11 +10,12 @@ interface LanguageContextType {
 }
 
 const translations: Record<Language, Record<string, string>> = {
-  ru: {
-    // Nav
-    brandName: "Мастер ТЧ",
-    navAbout: "О нас",
-    navCategories: "Услуги",
+   ru: {
+     // Nav
+     brandName: "Мастер ТЧ",
+     navHome: "Главная",
+     navAbout: "О нас",
+     navCategories: "Услуги",
     navMasters: "Мастера",
     navHowItWorks: "Как это работает",
     navContacts: "Контакты",
@@ -756,10 +757,11 @@ const translations: Record<Language, Record<string, string>> = {
     topProducts: "Топ товары",
     topProductsDesc: "Самые популярные товары в магазине",
   },
-  tj: {
-    brandName: "Мастер ТҶ",
-    navAbout: "Дар бораи мо",
-    navCategories: "Хидматҳо",
+   tj: {
+     brandName: "Мастер ТҶ",
+     navHome: "Асосӣ",
+     navAbout: "Дар бораи мо",
+     navCategories: "Хидматҳо",
     navMasters: "Устоҳо",
     navHowItWorks: "Тарзи кор",
     navContacts: "Тамос",
@@ -1086,9 +1088,10 @@ const translations: Record<Language, Record<string, string>> = {
     topMastersWeek: "Беҳтарин устоҳои ҳафта", topMastersWeekDesc: "Устоҳо бо нишондиҳандаҳои беҳтарин",
     topProducts: "Молҳои маъмул", topProductsDesc: "Маъмултарин молҳо дар мағоза",
   },
-  en: {
-    brandName: "Master TJ",
-    navAbout: "About Us", navCategories: "Services", navMasters: "Masters",
+   en: {
+     brandName: "Master TJ",
+     navHome: "Home",
+     navAbout: "About Us", navCategories: "Services", navMasters: "Masters",
     navHowItWorks: "How It Works", navContacts: "Contacts", navBecomeMaster: "Become a Master",
     navShop: "Shop", login: "Login", logout: "Logout", cabinet: "Dashboard", admin: "Admin",
     masterCabinet: "Master Dashboard", clientCabinet: "My Dashboard", subscription: "Subscription",
